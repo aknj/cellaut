@@ -23,8 +23,8 @@ board_t*    write_to_board(FILE* stream) {
     int n, m;
     int i, j;
     board_t *new_board;
-//    if(fscanf(stream, "%d %d", &n, &m) != 2)
-//        return NULL;
+    if(fscanf(stream, "%d %d", &n, &m) != 2)
+        return NULL;
     if((new_board = make_board(n, m)) == NULL)
         return NULL;
     for(i = 0; i < n; i++)

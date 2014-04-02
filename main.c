@@ -27,9 +27,8 @@ main(int argc, char **argv)
         return 1;
     }
 
-    fscanf(in, "%d %d", &n, &m);
-    board_t *b = make_board(n, m);
-    b = write_to_board(in);
+//    fscanf(in, "%d %d", &n, &m);
+    board_t *b = write_to_board(in);
 
     read_board(b, stdout);
 
