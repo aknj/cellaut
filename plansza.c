@@ -50,7 +50,7 @@ void        read_board(board_t* b, FILE* stream) {
     for(i = 0; i < b->n; i++) {
         for(j = 0; j < b->m; j++)
             fprintf(stream, " %d ", b->state[i * b->m + j]);
-        fprintf(stream, " %d \n", b->state[i * b->m + j]);
+        fprintf(stream, "  \n", b->state[i * b->m + j]);
     }
 }
 
