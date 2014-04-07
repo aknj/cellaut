@@ -1,7 +1,6 @@
 #include "plansza.h"
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
 /* funkcja mallocujaca pamiec na zmienna typu board_t */
 board_t*    make_board(int n, int m) {
@@ -14,7 +13,7 @@ board_t*    make_board(int n, int m) {
     }
     new_board->n = n;
     new_board->m = m;
-    //memset(new_board->state, 0, (size_t)(n * (size_t)m * sizeof *new_board->state));
+    memset(new_board->state, 0, (size_t)(n * (size_t)m * sizeof *new_board->state));
     return new_board;
 }
 
