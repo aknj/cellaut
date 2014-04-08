@@ -16,7 +16,6 @@ char *usage =
 int
 main(int argc, char **argv)
 {
-    int n, m;
     FILE *in = argc > 1 ? fopen(argv[1], "r") : NULL;
 
     if(in == NULL) {
@@ -27,7 +26,6 @@ main(int argc, char **argv)
         return 1;
     }
 
-//    fscanf(in, "%d %d", &n, &m);
     board_t *b = write_to_board(in);
 
     read_board(b, stdout);
