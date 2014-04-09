@@ -7,13 +7,12 @@ cellaut.out: main.o plansza.o rules.o
 
 plansza.o: plansza.h state.h
 
-rules.o: rules.h state.h 
-# neighborhood.h neighborhood.o
+rules.o: rules.h state.h neighborhood.h neighborhood.o
 
 # neighborhood.o: plansza.h
 
 clean:
-	rm -f main.o plansza.o cellaut.out
+	rm -f *.o cellaut.out
 
 testm: cellaut.out
 	./$< mat1

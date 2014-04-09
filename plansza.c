@@ -27,17 +27,23 @@ void free_board(board_t* b) {
 board_t*    write_to_board(FILE* stream) {
     int rn, cn;
     int i, j;
+    int temp;
     board_t *new_board;
     if(fscanf(stream, "%d %d", &rn, &cn) != 2)
         return NULL;
     if((new_board = make_board(rn, cn)) == NULL)
         return NULL;
     for(i = 0; i < rn; i++)
-        for(j = 0; j < cn; j++)
-            if(fscanf(stream, "%c", &new_board->state[i * cn + j]) != 1) {
+        for(j = 0; j < cn; j++) {
+            if(fscanf(stream, "%d", &temp) != 1) {
                 free_board(new_board);
                 return NULL;
             }
+            if(temp == 1)
+                new_board->state[i * cn + j] = ALIVE;
+            else
+                new_board->state[i * cn + j] = DEAD;
+        }
     return new_board;
 }
 
@@ -64,7 +70,7 @@ void        read_board(board_t* b, FILE* stream) {
     fprintf(stream, "%d %d\n", b->rn, b->cn);
     for(i = 0; i < b->rn; i++) {
         for(j = 0; j < b->cn; j++)
-            fprintf(stream, " %c ", b->state[i * b->cn + j]);
+            fprintf(stream, " %d ", b->state[i * b->cn + j]);
         fprintf(stream, "  \n");
     }
 }

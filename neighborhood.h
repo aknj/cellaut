@@ -5,11 +5,12 @@
 
 typedef struct {
     // ????????
-    int i;
     int max;
     state_t* neighbors;
 } neighborhood_t;
 
-neighborhood_t* neighbors(unsigned int x, unsigned int y);
+neighborhood_t* set_up_nbh();
+
+neighborhood_t* neighbors(board_t* b, unsigned int x, unsigned int y);
 
 #endif
