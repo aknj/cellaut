@@ -3,14 +3,21 @@
 
 #include "plansza.h"
 
+/* oficjalne skroty:
+ * *****************
+ * neighborhood =   nbhood
+ *
+ * uzywane wszedzie oprocz nazw plikow
+ */
+
 typedef struct {
     // ????????
     int max;
     state_t* neighbors;
-} neighborhood_t;
+} nbhood_t;
 
-neighborhood_t* set_up_nbh();
+nbhood_t* set_up_nbhood();
 
-neighborhood_t* neighbors(board_t* b, unsigned int x, unsigned int y);
+nbhood_t* get_nbhood(board_t* b, unsigned int x, unsigned int y);
 
 #endif

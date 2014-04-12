@@ -22,3 +22,11 @@ testm2: cellaut.out
 
 test1: cellaut.out
 	./cellaut.out dane1.board 16 2 test1
+
+# testy samego neighborhood
+
+nbhood_test.out: nbhood_test.o plansza.o rules.o neighborhood.o
+	$(CC) -o $@ $^ $(LFLAGS)
+
+testnbh: nbhood_test.out
+	./nbhood_test.out dane2

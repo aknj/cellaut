@@ -1,6 +1,6 @@
 #include "rules.h"
 
-int get_number_of_alive_neighbors(neighborhood_t* nbh) {
+int get_number_of_alive_neighbors(nbhood_t* nbh) {
     /* najpierw trzeba sie dowiedziec, jak wyglada neighborhood_t */
     int i;
     int sum = 0;
@@ -10,7 +10,7 @@ int get_number_of_alive_neighbors(neighborhood_t* nbh) {
     return sum;
 }
 
-state_t get_next_state(state_t current_state, neighborhood_t* neighbors) {
+state_t get_next_state(state_t current_state, nbhood_t* neighbors) {
     int sum = get_number_of_alive_neighbors(neighbors);
 
     if(current_state == DEAD) {
