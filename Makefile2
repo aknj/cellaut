@@ -1,9 +1,0 @@
-CC = gcc
-IDIR = lu
-CFLAGS = -I $(IDIR) -DDEBUG -g -Wall -pedantic -std=c99
-LFLAGS = -L $(IDIR) -l lu -lgsl -lgslcblas -lm
-
-cellaut: main.o aproksymator_na_bazie.o lu/liblu.a
-	cd lu; make; cd ..; \
-		cd gaus; make; cd ..; \
-			$(CC) -o aprox  main.o splines.o points.o aproksymator_na_bazie.o $(LFLAGS)
