@@ -30,5 +30,9 @@ main(int argc, char **argv)
         printf("sasiad nr %d: %d\n", i, neighbors->neighbors[i]);
     }
 
+    set_cell(b, 0, 0, DEAD);
+    // wypisywanie na ekranie
+    read_board(b, stdout);
+
     return 0;
 }

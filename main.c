@@ -1,4 +1,5 @@
-#include "plansza.h"
+#include "file_reader.h"
+#include "file_writer.h"
 
 #include <getopt.h>
 #include <stdio.h>
@@ -26,9 +27,9 @@ main(int argc, char **argv)
         return 1;
     }
 
-    board_t *b = write_to_board(in);
+    board_t *b = read_from_file(in);
 
-    read_board(b, stdout);
+    write_to_file(b, stdout);
 
     return 0;
 }

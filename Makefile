@@ -1,9 +1,12 @@
 CC = gcc
 CFLAGS = -DDEBUG -g -Wall -pedantic -std=c99
 LFLAGS = -lgsl -lgslcblas -lm
+NAME = life.out
 
-cellaut.out: main.o plansza.o rules.o
+$(NAME): main.o plansza.o rules.o textfile_reader.o textfile_writer.o
 	$(CC) -o $@ $^ $(LFLAGS)
+
+main.o: file_reader.h file_writer.h
 
 plansza.o: plansza.h state.h
 
@@ -12,16 +15,16 @@ rules.o: rules.h state.h neighborhood.h neighborhood.o
 # neighborhood.o: plansza.h
 
 clean:
-	rm -f *.o cellaut.out
+	rm -f *.o *.out
 
-testm: cellaut.out
+testm: $(NAME)
 	./$< mat1
 
-testm2: cellaut.out
+testm2: $(NAME)
 	./$< mat2
 
-test1: cellaut.out
-	./cellaut.out dane1.board 16 2 test1
+test1: $(NAME)
+	./$< dane1.board 16 2 test1
 
 # testy samego neighborhood
 

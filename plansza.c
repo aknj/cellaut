@@ -18,33 +18,9 @@ board_t*    make_board(int rn, int cn) {
     return new_board;
 }
 
-void free_board(board_t* b) {
+void        free_board(board_t* b) {
     free(b->state);
     free(b);
-}
-
-/* wczytaj do planszy dane z pliku */
-board_t*    write_to_board(FILE* stream) {
-    int rn, cn;
-    int i, j;
-    int temp;
-    board_t *new_board;
-    if(fscanf(stream, "%d %d", &rn, &cn) != 2)
-        return NULL;
-    if((new_board = make_board(rn, cn)) == NULL)
-        return NULL;
-    for(i = 0; i < rn; i++)
-        for(j = 0; j < cn; j++) {
-            if(fscanf(stream, "%d", &temp) != 1) {
-                free_board(new_board);
-                return NULL;
-            }
-            if(temp == 1)
-                new_board->state[i * cn + j] = ALIVE;
-            else
-                new_board->state[i * cn + j] = DEAD;
-        }
-    return new_board;
 }
 
 void        set_cell(board_t* b, int x, int y, state_t state) {
@@ -58,20 +34,3 @@ state_t     get_cell(board_t* b, int x, int y) {
     else
         return 0;                                // co ma sie dziac z obszarem poza brzegami?
 }
-
-/* przeczytaj dane z planszy b na strumien stream */
-void        read_board(board_t* b, FILE* stream) {
-    int i, j;
-    if(b == NULL) {
-        fprintf(stream, "Plansza jest pusta\n");
-        return;
-    }
-
-    fprintf(stream, "%d %d\n", b->rn, b->cn);
-    for(i = 0; i < b->rn; i++) {
-        for(j = 0; j < b->cn; j++)
-            fprintf(stream, " %d ", b->state[i * b->cn + j]);
-        fprintf(stream, "  \n");
-    }
-}
-
