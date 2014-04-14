@@ -14,22 +14,24 @@ rules.o: rules.h state.h neighborhood.h neighborhood.o
 
 # neighborhood.o: plansza.h
 
+.PHONY: clean testnbh
+
 clean:
-	rm -f *.o *.out
+	rm -f *.o test/*.o *.out
 
-testm: $(NAME)
-	./$< mat1
+#testm: $(NAME)
+#	./$< mat1
 
-testm2: $(NAME)
-	./$< mat2
+#testm2: $(NAME)
+#	./$< mat2
 
-test1: $(NAME)
-	./$< dane1.board 16 2 test1
+#test1: $(NAME)
+#	./$< dane1.board 16 2 test1
 
 # testy samego neighborhood
 
-nbhood_test.out: nbhood_test.o plansza.o rules.o neighborhood.o
+nbhood_test.out: test/nbhood_test.o plansza.o rules.o neighborhood.o textfile_reader.o textfile_writer.o
 	$(CC) -o $@ $^ $(LFLAGS)
 
 testnbh: nbhood_test.out
-	./nbhood_test.out dane2
+	./nbhood_test.out test/dane2
