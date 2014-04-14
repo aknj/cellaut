@@ -1,16 +1,16 @@
 CC = gcc
 CFLAGS = -DDEBUG -g -Wall -pedantic -std=c99
-LFLAGS = -lgsl -lgslcblas -lm
+LFLAGS = -lbmp -lm
 NAME = life.out
 
-$(NAME): main.o plansza.o rules.o textfile_reader.o textfile_writer.o
+$(NAME): main.o plansza.o rules.o boardio.o automaton.o neighborhood.o
 	$(CC) -o $@ $^ $(LFLAGS)
 
-main.o: file_reader.h file_writer.h
+main.o: boardio.h automaton.h
 
 plansza.o: plansza.h state.h
 
-rules.o: rules.h state.h neighborhood.h neighborhood.o
+rules.o: rules.h state.h neighborhood.h
 
 # neighborhood.o: plansza.h
 
@@ -30,7 +30,7 @@ clean:
 
 # testy samego neighborhood
 
-nbhood_test.out: test/nbhood_test.o plansza.o rules.o neighborhood.o textfile_reader.o textfile_writer.o
+nbhood_test.out: test/nbhood_test.o plansza.o rules.o neighborhood.o boardio.o
 	$(CC) -o $@ $^ $(LFLAGS)
 
 testnbh: nbhood_test.out

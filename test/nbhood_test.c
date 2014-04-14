@@ -1,6 +1,5 @@
 #include "../neighborhood.h"
-#include "../file_reader.h"
-#include "../file_writer.h"
+#include "../boardio.h"
 
 #include <stdio.h>
 #include <stdlib.h>
