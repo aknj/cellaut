@@ -3,7 +3,7 @@ CFLAGS = -DDEBUG -g -Wall -pedantic -std=c99
 LFLAGS = -lbmp -lm
 NAME = life.out
 
-$(NAME): main.o plansza.o rules.o boardio.o automaton.o neighborhood.o
+$(NAME): main.o plansza.o rules.o boardio.o automaton.o torus_neighborhood.o
 	$(CC) -o $@ $^ $(LFLAGS)
 
 main.o: boardio.h automaton.h
