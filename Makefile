@@ -1,9 +1,11 @@
 CC = gcc
-CFLAGS = -DDEBUG -g -Wall -pedantic -std=c99
-LFLAGS = -lbmp -lm
+LDIR = /home/user/lib
+CFLAGS = -DDEBUG -g -Wall -pedantic -std=c99 -I$(LDIR)/include
+LFLAGS = -L$(LDIR)/lib -lbmp -lm
 NAME = life.out
+NBHOOD_TYPE = 
 
-$(NAME): main.o plansza.o rules.o boardio.o automaton.o torus_neighborhood.o
+$(NAME): main.o plansza.o rules.o boardio.o automaton.o $(NBHOOD_TYPE)neighborhood.o
 	$(CC) -o $@ $^ $(LFLAGS)
 
 main.o: boardio.h automaton.h
@@ -14,10 +16,13 @@ rules.o: rules.h state.h neighborhood.h
 
 # neighborhood.o: plansza.h
 
-.PHONY: clean testnbh
+.PHONY: clean cleanbmps testnbh
 
 clean:
 	rm -f *.o test/*.o *.out
+
+cleanbmps:
+	rm -f *.bmp
 
 #testm: $(NAME)
 #	./$< mat1
@@ -25,8 +30,8 @@ clean:
 #testm2: $(NAME)
 #	./$< mat2
 
-#test1: $(NAME)
-#	./$< dane1.board 16 2 test1
+test1: $(NAME)
+	./$< test/diehard 20 1 output/diehard
 
 # testy samego neighborhood
 

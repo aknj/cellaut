@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <bmpfile.h>
+#include <string.h>
 
 char *usage =
     "Opcje: %s -f plik -n gen_n [-s krok] [-o prefix]\n"
@@ -22,6 +23,16 @@ main(int argc, char **argv)
     int n = argc > 2 ? atoi(argv[2]) : 20;
     int step = argc > 3 ? atoi(argv[3]) : 1;
     int i;
+    char *base = argc > 4 ? argv[4] : "output/life";
+    char filename[255];
+    char *filenametemp = base;
+    strcpy(filename, filenametemp);
+    int basenamel = strlen(filename);
+#ifdef DEBUG
+    printf("basenamel = %d\n", basenamel);
+#endif
+    char basename[255];
+    strcpy(basename, filename);
 
     if(in == NULL) {
         if(argc > 1)
@@ -37,6 +48,20 @@ main(int argc, char **argv)
 
     board_t *backb = prepare_backstage_board(b);
     for(i = 0; i < n; i++) {
+        if(i % step == 0) {
+            //memcpy(filename, filename, basenamel);
+            /* dodawanie numeru */
+            filename[0] = '\0';
+            strcat(filename, basename);
+            strcat(filename, "_");          // dopisanie do filename znaku _
+            char buf[20];
+            sprintf(buf, "%d", i);          // zamiana i na const char*
+            char* c = buf;
+            strcat(filename, c);            // dopisanie do filename numeru generacji
+            strcat(filename, ".bmp");       // dopisanie do filename .bmp
+
+            write_to_bmp(b, filename);
+        }
         prepare_next_states(b, backb); // to, co w momencie rozpoczecia tej funkcji jest na backb nas nie obchodzi
         swap_boards(&b, &backb);
     }
@@ -46,3 +71,5 @@ main(int argc, char **argv)
 
     return 0;
 }
+
+
