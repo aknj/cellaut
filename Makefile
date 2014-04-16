@@ -3,7 +3,7 @@ LDIR = /home/user/lib
 CFLAGS = -DDEBUG -g -Wall -pedantic -std=c99 -I$(LDIR)/include
 LFLAGS = -L$(LDIR)/lib -lbmp -lm
 NAME = life.out
-NBHOOD_TYPE = 
+NBHOOD_TYPE = torus_
 
 $(NAME): main.o plansza.o rules.o boardio.o automaton.o $(NBHOOD_TYPE)neighborhood.o
 	$(CC) -o $@ $^ $(LFLAGS)
@@ -14,26 +14,32 @@ plansza.o: plansza.h state.h
 
 rules.o: rules.h state.h neighborhood.h
 
-# neighborhood.o: plansza.h
-
 .PHONY: clean cleanbmps testnbh
 
 clean:
 	rm -f *.o test/*.o *.out
 
 cleanbmps:
-	rm -f *.bmp
+	cd output; rm *.bmp
 
-#testm: $(NAME)
-#	./$< mat1
+## testy
 
-#testm2: $(NAME)
-#	./$< mat2
+zabka: $(NAME)
+	./$< test/$@ 20 1 output/$@
 
-test1: $(NAME)
-	./$< test/diehard 20 1 output/diehard
+diehard: $(NAME)
+	./$< test/$@ 150 1 output/$@
 
-# testy samego neighborhood
+glider: $(NAME)
+	./$< test/$@ 200 1 output/$@
+
+gosperglidergun: $(NAME)
+	./$< test/$@ 100 1 output/$@
+
+gosperglidergun2: $(NAME)
+	./$< test/$@ 100 1 output/$@
+
+## testy neighborhood
 
 nbhood_test.out: test/nbhood_test.o plansza.o rules.o neighborhood.o boardio.o
 	$(CC) -o $@ $^ $(LFLAGS)
