@@ -26,6 +26,5 @@ state_t get_next_state(state_t current_state, nbhood_t* neighbors) {
             return DEAD;
     }
     else
-        /* this situation is interesting from a philosophical point of view */
         return DEAD;    // cos innego by sie tu przydalo
 }
