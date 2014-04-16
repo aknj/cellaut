@@ -1,18 +1,17 @@
 #include "boardio.h"
 #include "automaton.h"
 
-#include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <bmpfile.h>
 #include <string.h>
 
 char *usage =
-    "Opcje: %s -f plik -n gen_n [-s krok] [-o prefix]\n"
-    "       plik -  sciezka do pliku, z danymi poczatkowymi\n"
-    "       gen_n - liczba kolejnych generacji\n"
+    "Opcje: %s plik gen_n krok prefix\n"
+    "       plik -  sciezka do pliku z danymi poczatkowymi\n"
+    "       gen_n - liczba generacji\n"
     "       krok -  co ile iteracji jest wykonywany zapis generacji\n"
-    "               do pliku png (domyslnie 5)\n"
+    "               do pliku png (domyslnie 1)\n"
     "       prefix - napis, od ktorego beda zaczynaly sie nazwy\n"
     "               plikow png z zapisywanymi generacjami\n";
 
@@ -27,9 +26,9 @@ main(int argc, char **argv)
     char filename[255];
     char *filenametemp = base;
     strcpy(filename, filenametemp);
-    int basenamel = strlen(filename);
+    //int basenamel = strlen(filename);
 #ifdef DEBUG
-    printf("basenamel = %d\n", basenamel);
+    //printf("basenamel = %d\n", basenamel);
 #endif
     char basename[255];
     strcpy(basename, filename);
@@ -44,13 +43,14 @@ main(int argc, char **argv)
 
     board_t *b = read_from_file(in);
 
-    write_to_file(b, stdout);
+    //write_to_file(b, stdout);
 
     board_t *backb = prepare_backstage_board(b);
+
     for(i = 0; i < n; i++) {
         if(i % step == 0) {
-            //memcpy(filename, filename, basenamel);
-            /* dodawanie numeru */
+
+            /* tworzenie nazwy pliku */
             filename[0] = '\0';
             strcat(filename, basename);
             strcat(filename, "_");          // dopisanie do filename znaku _
@@ -66,8 +66,8 @@ main(int argc, char **argv)
         swap_boards(&b, &backb);
     }
 
-    printf("Stan planszy %d generacji pozniej:\n", n);
-    write_to_file(b, stdout);
+    //printf("Stan planszy %d generacji pozniej:\n", n);
+    //write_to_file(b, stdout);
 
     return 0;
 }

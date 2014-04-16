@@ -1,6 +1,5 @@
 #include "automaton.h"
 #include "rules.h"
-#include "neighborhood.h"
 
 board_t*    prepare_backstage_board(board_t* init_b) {
     board_t *backstage_board = make_board(init_b->rn, init_b->cn);
