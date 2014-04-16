@@ -11,7 +11,6 @@
  */
 
 typedef struct {
-    // ????????
     int max;
     state_t* neighbors;
 } nbhood_t;

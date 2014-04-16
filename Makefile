@@ -3,6 +3,7 @@ LDIR = /home/user/lib
 CFLAGS = -DDEBUG -g -Wall -pedantic -std=c99 -I$(LDIR)/include
 LFLAGS = -L$(LDIR)/lib -lbmp -lm
 NAME = life.out
+#NBHOOD_TYPE =
 NBHOOD_TYPE = torus_
 
 $(NAME): main.o plansza.o rules.o boardio.o automaton.o $(NBHOOD_TYPE)neighborhood.o
@@ -13,6 +14,8 @@ main.o: boardio.h automaton.h
 plansza.o: plansza.h state.h
 
 rules.o: rules.h state.h neighborhood.h
+
+$(NBHOOD_TYPE)neighborhood.o: neighborhood.h plansza.h
 
 .PHONY: clean cleanbmps testnbh
 
@@ -34,7 +37,10 @@ glider: $(NAME)
 	./$< test/$@ 200 1 output/$@
 
 gosperglidergun: $(NAME)
-	./$< test/$@ 100 1 output/$@
+	./$< test/$@ 100 2 output/$@
+
+lwss: $(NAME)
+	./$< test/$@ 40 1 output/$@
 
 gosperglidergun2: $(NAME)
 	./$< test/$@ 100 1 output/$@

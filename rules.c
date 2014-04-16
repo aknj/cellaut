@@ -1,7 +1,6 @@
 #include "rules.h"
 
 int get_number_of_alive_neighbors(nbhood_t* nbh) {
-    /* najpierw trzeba sie dowiedziec, jak wyglada neighborhood_t */
     int i;
     int sum = 0;
     for(i = 0; i < nbh->max; i++)

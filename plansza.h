@@ -16,12 +16,9 @@ board_t*    make_board(int rn, int cn);
 
 void        free_board(board_t* b);
 
-//board_t*    write_to_board(FILE* stream);
-
 void        set_cell(board_t* b, int x, int y, state_t state);
 
 state_t     get_cell(board_t* b, int x, int y);
 
-//void        read_board(board_t* b, FILE* stream);
 
 #endif
