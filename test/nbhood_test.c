@@ -23,7 +23,7 @@ main(int argc, char **argv)
 
     // sprawdzanie przykladowego sasiedztwa
     int x = 0;
-    int y = 1;
+    int y = 2;
     printf("komorka (%d, %d):\n stan: %d\n", x+1, y+1, get_cell(b, x, y));
     nbhood_t* neighbors = get_nbhood(b, x, y);
 

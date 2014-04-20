@@ -16,11 +16,11 @@ nbhood_t* get_nbhood(board_t* b, unsigned int x, unsigned int y) {
     // pierwszy sasiad (gora)
     n->neighbors[0] = get_cell(b, x-1, y);
     // prawy gorny
-    n->neighbors[1] = get_cell(b, x-1, y+1);
+    n->neighbors[1] = y == b->cn-1 ? 0 : get_cell(b, x-1, y+1);
     // prawy
-    n->neighbors[2] = get_cell(b, x, y+1);
+    n->neighbors[2] = y == b->cn-1 ? 0 : get_cell(b, x, y+1);
     // prawy dolny
-    n->neighbors[3] = get_cell(b, x+1, y+1);
+    n->neighbors[3] = y == b->cn-1 ? 0 : get_cell(b, x+1, y+1);
     // dol
     n->neighbors[4] = get_cell(b, x+1, y);
     // lewy dolny
@@ -32,3 +32,20 @@ nbhood_t* get_nbhood(board_t* b, unsigned int x, unsigned int y) {
 
     return n;
 }
+  /*  // pierwszy sasiad (gora)
+    n->neighbors[0] = x == 0 ? 0 : get_cell(b, x-1, y);
+    // prawy gorny
+    n->neighbors[1] = get_cell(b, x == 0 ? b->rn-1 : x-1,   y == b->cn-1 ? 0 : y+1);
+    // prawy
+    n->neighbors[2] = get_cell(b, x,                        y == b->cn-1 ? 0 : y+1);
+    // prawy dolny
+    n->neighbors[3] = get_cell(b, x == b->rn-1 ? 0 : x+1,   y == b->cn-1 ? 0 : y+1);
+    // dol
+    n->neighbors[4] = get_cell(b, x == b->rn-1 ? 0 : x+1,   y);
+    // lewy dolny
+    n->neighbors[5] = get_cell(b, x == b->rn-1 ? 0 : x+1,   y == 0 ? b->cn-1 : y-1);
+    // lewy
+    n->neighbors[6] = get_cell(b, x,                        y == 0 ? b->cn-1 : y-1);
+    // lewy gorny 
+    n->neighbors[7] = get_cell(b, x == 0 ? b->rn-1 : x-1,   y == 0 ? b->cn-1 : y-1);
+    */
