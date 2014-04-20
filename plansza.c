@@ -29,7 +29,7 @@ void        set_cell(board_t* b, int x, int y, state_t state) {
 }
 
 state_t     get_cell(board_t* b, int x, int y) {
-    if(x >= 0 && x <= b->rn && y >= 0 && y <= b->cn)
+    if(x >= 0 && x < b->rn && y >= 0 && y < b->cn)
         return b->state[x * b->cn + y];
     else
         return 0;                                // co ma sie dziac z obszarem poza brzegami?
