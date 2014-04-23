@@ -2,6 +2,7 @@
 #include "plansza.h"
 #include <bmpfile.h>
 
+const int depth = 1;
 const rgb_pixel_t dead = {255, 255, 255, 0};
 const rgb_pixel_t alive = {0, 0, 0, 0};
 
@@ -51,7 +52,6 @@ void write_to_bmp(board_t* b, const char *filename) {
     bmpfile_t *bmp;
     int i, j;
     int cell_sz = 5;
-    int depth = 1;
     int width = cell_sz * b->cn;
     int height = cell_sz * b->rn;
 
@@ -59,17 +59,14 @@ void write_to_bmp(board_t* b, const char *filename) {
 
     bmp = bmp_create(width, height, depth);
 
-    //rgb_pixel_t dead = {255, 255, 255, 0};
-    //rgb_pixel_t alive = {0, 0, 0, 0};
-
     for(i = 0; i < height; i+=5) {
         for(j = 0; j < width; j+=5) {
             if(get_cell(b, i/5, j/5) == ALIVE) {
                 print_cell_to_bmp(bmp, j, i, cell_sz, alive);
             }
-            //else {
-            //    bmp_set_pixel(bmp, j, i, dead);
-            //}
+            else {
+                print_cell_to_bmp(bmp, j, i, cell_sz, dead);
+            }
         }
     }
 
